@@ -7,10 +7,10 @@ export default async function Header() {
     const settings = await client.getSingle("settings");
 
     return (
-        <header className="bg-darkGray text-white flex justify-between p-4">
+        <header className="bg-darkGray text-white flex justify-between py-4 px-[30px]">
             <Logo />
             <nav>
-                <ul className="flex gap-5">
+                <ul className="flex gap-11">
                     {settings.data.navigation.map(({link, label}) => (
                         <li key={label}>
                             <PrismicNextLink field={link}>{label}</PrismicNextLink>
