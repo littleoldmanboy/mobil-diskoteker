@@ -1,23 +1,24 @@
 import { createClient } from "@/prismicio";
 import { PrismicNextLink } from "@prismicio/next";
-import Logo from "./Logo";
+import Logo from "@/components/Logo";
+import Bounded from "@/components/Bounded";
 
 export default async function Header() {
     const client = createClient();
     const settings = await client.getSingle("settings");
 
     return (
-        <header className="bg-darkGray text-white flex justify-between py-4 px-[30px]">
+        <Bounded as="header" className="text-white flex justify-between">
             <Logo />
-            <nav>
+            <nav className="my-auto">
                 <ul className="flex gap-11">
                     {settings.data.navigation.map(({link, label}) => (
                         <li key={label}>
-                            <PrismicNextLink field={link}>{label}</PrismicNextLink>
+                            <PrismicNextLink field={link} className="py-4">{label}</PrismicNextLink>
                         </li>
                     ))}
                 </ul>
             </nav>
-        </header>
+        </Bounded>
     );
 }

@@ -46,7 +46,7 @@ export default function Logo() {
   };
 
   return (
-    <a href='/' className='my-auto py-0.5'>
+    <a href='/' className='py-4'>
       <video
         className='cursor-pointer'
         ref={videoRef}
@@ -59,12 +59,12 @@ export default function Logo() {
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        muted // Required to autoplay in most browsers
+        muted
         preload="auto"
-        style={{ width: 'auto', height: '20px' }} // Check this height adjustment, seems very small
+        style={{ width: 'auto', height: '20px' }}
       >
         <source src="/logo-animation.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
+        Logo animation (your browser does not support the video tag)
       </video>
     </a>
   );
