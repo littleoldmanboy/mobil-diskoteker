@@ -13,6 +13,9 @@ module.exports = {
         purpleIsh: '#7878FF',  // Custom purple
         greenIsh: '#85FFCD',  // Custom green
       },
+      height: {
+        'svh-minus-52': 'calc(100vh - 52px)',
+      },
     },
   },
   plugins: [],

@@ -12,7 +12,7 @@ export default async function Footer() {
         </a>
         <ul className="flex-column my-auto gap-5">
             {settings.data.navigation.map(({link, label})=>(
-                <li key={label}>
+                <li key={label} className="opacity-75 hover:opacity-100 transition-opacity duration-200 ease-in-out">
                     <PrismicNextLink field={link}>{label}</PrismicNextLink>
                 </li>
             ))}

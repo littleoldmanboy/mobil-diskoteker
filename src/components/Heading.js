@@ -5,7 +5,7 @@ export default function Heading({
 }) {
     return (
         <Comp className={clsx(
-            'leading-tight tracking-widest md:leading-tight', 
+            'leading-tight md:leading-tight', 
             size === "xl" && "md:text-5xl text-4xl",
             size === "lg" && "md:text-4xl text-3xl",
             size === "md" && "md:text-3xl text-2xl",

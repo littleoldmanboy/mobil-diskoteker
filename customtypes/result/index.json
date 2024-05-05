@@ -1,0 +1,83 @@
+{
+  "format": "custom",
+  "id": "result",
+  "label": "Result",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "image": {
+        "type": "Image",
+        "config": {
+          "label": "Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Title",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "heading2"
+        }
+      },
+      "price": {
+        "type": "Number",
+        "config": {
+          "label": "Price",
+          "placeholder": ""
+        }
+      },
+      "button_link": {
+        "type": "Link",
+        "config": {
+          "label": "Button Link",
+          "placeholder": "",
+          "select": null
+        }
+      },
+      "locations": {
+        "type": "Group",
+        "config": {
+          "label": "Locations",
+          "repeat": true,
+          "fields": {
+            "location": {
+              "type": "Select",
+              "config": {
+                "label": "Location",
+                "placeholder": "",
+                "options": ["Nord-Midtjylland", "Syddanmark", "Sjælland"]
+              }
+            }
+          }
+        }
+      },
+      "music_styles": {
+        "type": "Group",
+        "config": {
+          "label": "Music Styles",
+          "repeat": true,
+          "fields": {
+            "music_style": {
+              "type": "Select",
+              "config": {
+                "label": "Music Style",
+                "placeholder": "",
+                "options": ["Pop", "Classics", "Elektronisk", "Jazz"]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

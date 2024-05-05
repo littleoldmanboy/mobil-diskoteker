@@ -1,0 +1,39 @@
+{
+  "id": "results",
+  "type": "SharedSlice",
+  "name": "Results",
+  "description": "Results",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading2"
+          }
+        }
+      },
+      "items": {
+        "result": {
+          "type": "Link",
+          "config": {
+            "label": "Result",
+            "select": "document",
+            "customtypes": [
+              "result"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

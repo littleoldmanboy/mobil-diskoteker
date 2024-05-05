@@ -4,28 +4,27 @@ import Bounded from '@/components/Bounded';
 import Button from '@/components/Button';
 import Heading from '@/components/Heading';
 
-const components = {
-  heading1: ({ children }) => (
-    <Heading as="h1" size="xl" className="font-medium text-center bg-gradient-to-r from-purpleIsh to-greenIsh text-transparent bg-clip-text max-w-[900px]">{children}</Heading>
-  ),
-  paragraph: ({ children }) => (
-    <p className='text-[13px] font-normal text-center tracking-widest text-white opacity-60 max-w-72 mt-[40px] leading-tight'>{children}</p>
-  ),
-}
-
 /**
  * @typedef {import("@prismicio/client").Content.HeroSlice} HeroSlice
  * @typedef {import("@prismicio/react").SliceComponentProps<HeroSlice>} HeroProps
  * @param {HeroProps} props
  */
 
-
+const components = {
+  heading1: ({ children }) => (
+    <Heading as="h1" size="xl" className="tracking-widest font-medium text-center bg-gradient-to-r from-purpleIsh to-greenIsh text-transparent bg-clip-text max-w-[900px]">{children}</Heading>
+  ),
+  paragraph: ({ children }) => (
+    <p className='text-[13px] font-normal text-center tracking-widest text-white opacity-60 max-w-72 mt-[40px] leading-tight'>{children}</p>
+  ),
+};
 
 const Hero = ({ slice }) => {
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className="h-svh-minus-52 flex justify-center"
     >
       <div className='flex flex-col items-center justify-center'>
         <PrismicRichText field={slice.primary.heading} components={components} />
@@ -36,6 +35,11 @@ const Hero = ({ slice }) => {
           </Button>
         </span>
       </div>
+      <a href="" className='absolute bottom-8 opacity-40 cursor-pointer hover:opacity-100 transition-opacity duration-200 ease-in-out p-3'>
+        <svg width="25" height="14" viewBox="0 0 25 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23.7864 0.535358C23.4435 0.192568 22.9785 -1.26672e-06 22.4937 -1.7831e-06C22.0088 -2.29949e-06 21.5438 0.192566 21.2009 0.535355L12.1499 9.58639L3.09884 0.535336C2.75398 0.202261 2.2921 0.0179585 1.81268 0.022124C1.33325 0.0262896 0.874642 0.21859 0.535623 0.557607C0.196605 0.896624 0.00430613 1.35523 0.000139541 1.83466C-0.00402705 2.31408 0.180274 2.77597 0.513349 3.12082L10.8571 13.4646C11.2 13.8074 11.665 14 12.1499 14C12.6347 14 13.0997 13.8074 13.4426 13.4646L23.7864 3.12085C24.1292 2.77796 24.3218 2.31296 24.3218 1.8281C24.3218 1.34325 24.1292 0.878252 23.7864 0.535358Z" fill="white"/>
+        </svg>
+      </a>
     </Bounded>
   );
 };

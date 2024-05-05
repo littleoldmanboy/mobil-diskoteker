@@ -46,7 +46,10 @@ export default function Logo() {
   };
 
   return (
-    <a href='/' className='py-4'>
+    <a href='/' className='py-4'
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <video
         className='cursor-pointer'
         ref={videoRef}
@@ -57,8 +60,6 @@ export default function Logo() {
             videoRef.current.pause();
           }
         }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
         muted
         preload="auto"
         style={{ width: 'auto', height: '20px' }}
