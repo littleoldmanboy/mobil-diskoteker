@@ -37,7 +37,7 @@ const Results = async ({ slice }) => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="flex flex-col gap-6 w-6/12"
+      className="flex flex-col gap-6"
     >
       {results.map((item, index) => item && (
         <div key={index} className='flex p-4 bg-[#2b2b2b] rounded-3xl justify-between'>
@@ -73,7 +73,7 @@ const Results = async ({ slice }) => {
                   ))}
                 </div>
               </div>
-              <div className='text-white flex tracking-wider'>
+              <div className='text-white flex tracking-wider gap-2'>
                 <p className='md:text-3xl text-2xl'>{item.data.price}</p>
                 <span className='self-end text-xl opacity-60'>kr.</span>
               </div>

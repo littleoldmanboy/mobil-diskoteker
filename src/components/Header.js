@@ -8,7 +8,7 @@ export default async function Header() {
     const settings = await client.getSingle("settings");
 
     return (
-        <Bounded as="header" className="text-white flex justify-between">
+        <Bounded as="header" className="text-white flex justify-between fixed w-full z-50">
             <Logo />
             <div className="flex gap-11">
                 <nav className="my-auto">
