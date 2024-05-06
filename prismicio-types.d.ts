@@ -405,21 +405,6 @@ type HeroSliceVariation = HeroSliceDefault;
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 /**
- * Primary content in *Results → Primary*
- */
-export interface ResultsSliceDefaultPrimary {
-  /**
-   * Heading field in *Results → Primary*
-   *
-   * - **Field Type**: Title
-   * - **Placeholder**: *None*
-   * - **API ID Path**: results.primary.heading
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  heading: prismic.TitleField;
-}
-
-/**
  * Primary content in *Results → Items*
  */
 export interface ResultsSliceDefaultItem {
@@ -443,7 +428,7 @@ export interface ResultsSliceDefaultItem {
  */
 export type ResultsSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Simplify<ResultsSliceDefaultPrimary>,
+  Record<string, never>,
   Simplify<ResultsSliceDefaultItem>
 >;
 
@@ -492,7 +477,6 @@ declare module "@prismicio/client" {
       HeroSliceVariation,
       HeroSliceDefault,
       ResultsSlice,
-      ResultsSliceDefaultPrimary,
       ResultsSliceDefaultItem,
       ResultsSliceVariation,
       ResultsSliceDefault,
