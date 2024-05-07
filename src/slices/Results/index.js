@@ -1,10 +1,10 @@
 import { PrismicRichText } from '@prismicio/react';
-import Bounded from '@/components/Bounded';
-import Button from '@/components/Button';
-import Heading from '@/components/Heading';
 import { isFilled } from '@prismicio/client';
 import { createClient } from '@/prismicio';
 import { PrismicNextImage } from '@prismicio/next';
+import Bounded from '@/components/Bounded';
+import Button from '@/components/Button';
+import Heading from '@/components/Heading';
 import React from 'react';
 
 /**
