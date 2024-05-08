@@ -1,0 +1,51 @@
+{
+  "format": "custom",
+  "id": "step",
+  "label": "Step",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "type": {
+        "type": "Select",
+        "config": {
+          "label": "Type",
+          "placeholder": "",
+          "options": ["Anledning", "Lokation", "Budget", "Musik"]
+        }
+      },
+      "question": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Question",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "heading2"
+        }
+      },
+      "filter_buttons": {
+        "type": "Group",
+        "config": {
+          "label": "Filter Buttons",
+          "repeat": true,
+          "fields": {
+            "filter_button": {
+              "type": "Link",
+              "config": {
+                "label": "Filter Button",
+                "select": "document",
+                "customtypes": ["filter_button"]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

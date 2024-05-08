@@ -9,15 +9,26 @@ type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
  */
 interface FilterButtonDocumentData {
   /**
-   * Label field in *Filter Button*
+   * Value field in *Filter Button*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Select
    * - **Placeholder**: *None*
-   * - **API ID Path**: filter_button.label
+   * - **API ID Path**: filter_button.value
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Documentation**: https://prismic.io/docs/field#select
    */
-  label: prismic.KeyTextField;
+  value: prismic.SelectField<
+    | "Privatfest"
+    | "Formel Fest"
+    | "Offentligt Event"
+    | "Nord-Midtjylland"
+    | "Syddanmark"
+    | "Sjælland"
+    | "Pop"
+    | "Classics"
+    | "Elektronisk"
+    | "Jazz"
+  >;
 
   /**
    * Description field in *Filter Button*
@@ -47,7 +58,7 @@ export type FilterButtonDocument<Lang extends string = string> =
     Lang
   >;
 
-type HomepageDocumentDataSlicesSlice = ResultsSlice | HeroSlice;
+type HomepageDocumentDataSlicesSlice = StepsSlice | ResultsSlice | HeroSlice;
 
 /**
  * Content for Homepage documents
@@ -154,6 +165,23 @@ export interface ResultDocumentDataMusicStylesItem {
 }
 
 /**
+ * Item in *Result → Occasions*
+ */
+export interface ResultDocumentDataOccasionItem {
+  /**
+   * Occasion field in *Result → Occasions*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: result.occasion[].occasion
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  occasion: prismic.SelectField<
+    "Privatfest" | "Formel Fest" | "Offentligt Event"
+  >;
+}
+
+/**
  * Content for Result documents
  */
 interface ResultDocumentData {
@@ -222,6 +250,17 @@ interface ResultDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   music_styles: prismic.GroupField<Simplify<ResultDocumentDataMusicStylesItem>>;
+
+  /**
+   * Occasions field in *Result*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: result.occasion[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  occasion: prismic.GroupField<Simplify<ResultDocumentDataOccasionItem>>;
 }
 
 /**
@@ -326,11 +365,79 @@ export type SettingsDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Item in *Step → Filter Buttons*
+ */
+export interface StepDocumentDataFilterButtonsItem {
+  /**
+   * Filter Button field in *Step → Filter Buttons*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: step.filter_buttons[].filter_button
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  filter_button: prismic.ContentRelationshipField<"filter_button">;
+}
+
+/**
+ * Content for Step documents
+ */
+interface StepDocumentData {
+  /**
+   * Type field in *Step*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: step.type
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  type: prismic.SelectField<"Anledning" | "Lokation" | "Budget" | "Musik">;
+
+  /**
+   * Question field in *Step*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: step.question
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  question: prismic.TitleField;
+
+  /**
+   * Filter Buttons field in *Step*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: step.filter_buttons[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  filter_buttons: prismic.GroupField<
+    Simplify<StepDocumentDataFilterButtonsItem>
+  >;
+}
+
+/**
+ * Step document from Prismic
+ *
+ * - **API ID**: `step`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type StepDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<StepDocumentData>, "step", Lang>;
+
 export type AllDocumentTypes =
   | FilterButtonDocument
   | HomepageDocument
   | ResultDocument
-  | SettingsDocument;
+  | SettingsDocument
+  | StepDocument;
 
 /**
  * Primary content in *Hero → Primary*
@@ -449,6 +556,48 @@ export type ResultsSlice = prismic.SharedSlice<
   ResultsSliceVariation
 >;
 
+/**
+ * Primary content in *Steps → Items*
+ */
+export interface StepsSliceDefaultItem {
+  /**
+   * Step field in *Steps → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: steps.items[].step
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  step: prismic.ContentRelationshipField<"step">;
+}
+
+/**
+ * Default variation for Steps Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type StepsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  Simplify<StepsSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *Steps*
+ */
+type StepsSliceVariation = StepsSliceDefault;
+
+/**
+ * Steps Shared Slice
+ *
+ * - **API ID**: `steps`
+ * - **Description**: Steps
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type StepsSlice = prismic.SharedSlice<"steps", StepsSliceVariation>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -468,9 +617,13 @@ declare module "@prismicio/client" {
       ResultDocumentData,
       ResultDocumentDataLocationsItem,
       ResultDocumentDataMusicStylesItem,
+      ResultDocumentDataOccasionItem,
       SettingsDocument,
       SettingsDocumentData,
       SettingsDocumentDataNavigationItem,
+      StepDocument,
+      StepDocumentData,
+      StepDocumentDataFilterButtonsItem,
       AllDocumentTypes,
       HeroSlice,
       HeroSliceDefaultPrimary,
@@ -480,6 +633,10 @@ declare module "@prismicio/client" {
       ResultsSliceDefaultItem,
       ResultsSliceVariation,
       ResultsSliceDefault,
+      StepsSlice,
+      StepsSliceDefaultItem,
+      StepsSliceVariation,
+      StepsSliceDefault,
     };
   }
 }

@@ -12,11 +12,23 @@
         },
         "type": "UID"
       },
-      "label": {
-        "type": "Text",
+      "value": {
+        "type": "Select",
         "config": {
-          "label": "Label",
-          "placeholder": ""
+          "label": "Value",
+          "placeholder": "",
+          "options": [
+            "Privatfest",
+            "Formel Fest",
+            "Offentligt Event",
+            "Nord-Midtjylland",
+            "Syddanmark",
+            "Sjælland",
+            "Pop",
+            "Classics",
+            "Elektronisk",
+            "Jazz"
+          ]
         }
       },
       "description": {

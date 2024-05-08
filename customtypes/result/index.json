@@ -77,6 +77,23 @@
             }
           }
         }
+      },
+      "occasion": {
+        "type": "Group",
+        "config": {
+          "label": "Occasions",
+          "repeat": true,
+          "fields": {
+            "occasion": {
+              "type": "Select",
+              "config": {
+                "label": "Occasion",
+                "placeholder": "",
+                "options": ["Privatfest", "Formel Fest", "Offentligt Event"]
+              }
+            }
+          }
+        }
       }
     }
   }
