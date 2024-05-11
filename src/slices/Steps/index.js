@@ -4,6 +4,7 @@ import { createClient } from '@/prismicio';
 import Bounded from '@/components/Bounded';
 import Heading from '@/components/Heading';
 import Filter from '@/components/Filter';
+import React from 'react';
 
 /**
  * @typedef {import("@prismicio/client").Content.StepsSlice} StepsSlice
@@ -17,13 +18,35 @@ const components = {
   ),
 };
 
-const Steps = ({ slice }) => {
+const Steps = async ({ slice }) => {
+
+  const client = createClient();
+
+  const steps = await Promise.all(
+    slice.items.map((item) => {
+      if (
+        isFilled.contentRelationship(item.step) && item.step.uid
+      ) {
+        return client.getByUID("step", item.step.uid)
+      }
+    })
+  );
+
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      Placeholder component for steps (variation: {slice.variation}) Slices
+      {steps.map((item, index) => item && (
+        <div key={index}>
+          <PrismicRichText components={components} field={item.data.question} />
+          {item.data.filter_buttons.map((filter_buttonItem, index) => (
+            <React.Fragment key={index}>
+              <Filter>{filter_buttonItem?.filter_button?.data?.value || 'Placeholder text'}</Filter>
+            </React.Fragment>
+          ))}
+        </div>
+      ))}
     </Bounded>
   );
 };
