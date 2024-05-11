@@ -4,6 +4,7 @@ import { createClient } from '@/prismicio';
 import Bounded from '@/components/Bounded';
 import Heading from '@/components/Heading';
 import Filter from '@/components/Filter';
+import InfoButton from '@/components/InfoButton';
 import React from 'react';
 
 /**
@@ -19,16 +20,17 @@ const components = {
 };
 
 const Steps = async ({ slice }) => {
-
+  
   const client = createClient();
 
   const steps = await Promise.all(
     slice.items.map((item) => {
-      if (
-        isFilled.contentRelationship(item.step) && item.step.uid
-      ) {
-        return client.getByUID("step", item.step.uid)
+      if (isFilled.contentRelationship(item.step) && item.step.uid) {
+        return client.getByUID("step", item.step.uid, {
+          fetchLinks: ['filter_button.value, filter_button.description']
+        });
       }
+      return Promise.resolve(null);
     })
   );
 
@@ -36,15 +38,21 @@ const Steps = async ({ slice }) => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className="pt-36"
     >
       {steps.map((item, index) => item && (
         <div key={index}>
           <PrismicRichText components={components} field={item.data.question} />
-          {item.data.filter_buttons.map((filter_buttonItem, index) => (
-            <React.Fragment key={index}>
-              <Filter>{filter_buttonItem?.filter_button?.data?.value || 'Placeholder text'}</Filter>
-            </React.Fragment>
-          ))}
+          <div className='flex gap-4 mt-9'>
+            {item.data.filter_buttons.map((filter_buttonItem, index) => (
+              <React.Fragment key={index}>
+                <div className='relative w-fit'>
+                  <Filter>{filter_buttonItem.filter_button.data.value}</Filter>
+                  <InfoButton>i</InfoButton>
+                </div>
+              </React.Fragment>
+            ))}
+          </div>
         </div>
       ))}
     </Bounded>
