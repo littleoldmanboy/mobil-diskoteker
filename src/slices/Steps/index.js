@@ -38,23 +38,25 @@ const Steps = async ({ slice }) => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="pt-36"
+      className="h-svh flex"
     >
-      {steps.map((item, index) => item && (
-        <div key={index}>
-          <PrismicRichText components={components} field={item.data.question} />
-          <div className='flex gap-4 mt-9'>
-            {item.data.filter_buttons.map((filter_buttonItem, index) => (
-              <React.Fragment key={index}>
-                <div className='relative w-fit'>
-                  <Filter>{filter_buttonItem.filter_button.data.value}</Filter>
-                  <InfoButton>i</InfoButton>
-                </div>
-              </React.Fragment>
-            ))}
+      <div className='h-[711px] my-auto py-6'>
+        {steps.map((item, index) => item && (
+          <div key={index}>
+            <PrismicRichText components={components} field={item.data.question} />
+            <div className='flex gap-4 mt-9'>
+              {item.data.filter_buttons.map((filter_buttonItem, index) => (
+                <React.Fragment key={index}>
+                  <div className='relative w-fit'>
+                    <Filter>{filter_buttonItem.filter_button.data.value}</Filter>
+                    <InfoButton>i</InfoButton>
+                  </div>
+                </React.Fragment>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </Bounded>
   );
 };

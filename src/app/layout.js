@@ -26,6 +26,7 @@ export default function RootLayout({ children }) {
         <Header />
         {children}
         <Footer />
+        <div className="fixed bg-darkGray inset-0 -z-10" />
         <PrismicPreview repositoryName={repositoryName} />
       </body>
     </html>

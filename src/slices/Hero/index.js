@@ -24,7 +24,7 @@ const Hero = ({ slice }) => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="h-svh flex justify-center"
+      className="h-svh flex justify-center col-span-2"
     >
       <div className='flex flex-col items-center justify-center'>
         <PrismicRichText field={slice.primary.heading} components={components} />
