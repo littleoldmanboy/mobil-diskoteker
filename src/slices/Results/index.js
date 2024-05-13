@@ -40,7 +40,7 @@ const Results = async ({ slice }) => {
       className="flex flex-col gap-6 h-svh overflow-y-auto max-h-[711px] py-6 my-auto"
     >
       {results.map((item, index) => item && (
-        <div key={index} className='flex p-4 bg-[#2b2b2b] rounded-3xl justify-between'>
+        <div key={index} className='flex p-4 bg-[#2b2b2b] rounded-3xl justify-between drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.1)]'>
           <div className='flex'>
             <PrismicNextImage 
               width={173} 
@@ -79,7 +79,7 @@ const Results = async ({ slice }) => {
               </div>
             </div>
           </div>
-          <Button field={item.data.button_link} className='text-[13px] w-[85px] h-[56px] border border-[#6a6a6a] hover:bg-[#303030] self-end'>
+          <Button field={item.data.button_link} className='text-[13px] w-[85px] h-[56px] border border-[#6a6a6a] hover:bg-[#3a3a3a] self-end'>
             Book
           </Button>
         </div>

@@ -29,7 +29,7 @@ const Hero = ({ slice }) => {
       <div className='flex flex-col items-center justify-center'>
         <PrismicRichText field={slice.primary.heading} components={components} />
         <PrismicRichText field={slice.primary.body} components={components} />
-        <span className='bg-gradient-to-r	from-purpleIsh to-greenIsh rounded-full p-px mt-[18px] drop-shadow-[-4px_0.5px_5.5px_rgba(0,0,0,0.25)]'>
+        <span className='bg-gradient-to-r	from-purpleIsh to-greenIsh rounded-full p-px mt-[18px] drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.25)]'>
           <Button field={slice.primary.button_link} className='text-[15px] w-[110px] h-[58px] bg-[#303030] hover:bg-[#3a3a3a]'>
             {slice.primary.button_text}
           </Button>

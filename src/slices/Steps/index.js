@@ -47,7 +47,7 @@ const Steps = async ({ slice }) => {
             <div className='flex gap-4 mt-9'>
               {item.data.filter_buttons.map((filter_buttonItem, index) => (
                 <React.Fragment key={index}>
-                  <div className='relative w-fit'>
+                  <div className='relative w-fit drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.25)]'>
                     <Filter>{filter_buttonItem.filter_button.data.value}</Filter>
                     <InfoButton>i</InfoButton>
                   </div>
