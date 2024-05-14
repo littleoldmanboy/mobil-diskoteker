@@ -25,9 +25,11 @@ const Steps = async ({ slice }) => {
 
   const steps = await Promise.all(
     slice.items.map((item) => {
-      if (isFilled.contentRelationship(item.step) && item.step.uid) {
+      if (
+        isFilled.contentRelationship(item.step) && item.step.uid
+      ) {
         return client.getByUID("step", item.step.uid, {
-          fetchLinks: ['filter_button.value, filter_button.description']
+          fetchLinks: ["filter_button.value", "filter_button.description"]
         });
       }
       return Promise.resolve(null);
@@ -48,7 +50,7 @@ const Steps = async ({ slice }) => {
               {item.data.filter_buttons.map((filter_buttonItem, index) => (
                 <React.Fragment key={index}>
                   <div className='relative w-fit drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.25)]'>
-                    <Filter>{filter_buttonItem.filter_button.data.value}</Filter>
+                    <Filter>{filter_buttonItem.filter_button.data?.value}</Filter>
                     <InfoButton>i</InfoButton>
                   </div>
                 </React.Fragment>
