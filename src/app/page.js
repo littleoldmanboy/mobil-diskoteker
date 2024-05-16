@@ -1,16 +1,21 @@
 import { SliceZone } from "@prismicio/react";
-
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
+import Head from "next/head";
 
 export default async function Page() {
   const client = createClient();
   const page = await client.getSingle("homepage");
 
   return (
-    <div className="grid grid-cols-2 bg-darkGray max-w-screen-2xl mx-auto">
-      <SliceZone slices={page.data.slices} components={components} />
-    </div>
+    <>
+      <Head>
+        <meta name="theme-color" content="#222222" />
+      </Head>
+      <div className="grid grid-cols-1 lg:grid-cols-2 bg-darkGray max-w-screen-2xl mx-auto">
+        <SliceZone slices={page.data.slices} components={components} />
+      </div>
+    </>
   );
 }
 

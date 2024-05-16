@@ -1,21 +1,11 @@
-import { createClient } from "@/prismicio";
-import { PrismicNextLink } from "@prismicio/next";
 import Image from "next/image";
 import Bounded from "@/components/Bounded";
 
-export default async function Footer() {
-    const client = createClient();
-    const settings = await client.getSingle("settings");
-    return <Bounded as="footer" className="text-white py-4 flex justify-between items-center">
+export default function Footer() {
+    return <Bounded as="footer" className="text-white py-4 flex justify-center items-center relative">
+        <div className="absolute left-1/2 transform -translate-x-1/2 top-0 h-px w-screen bg-[#464646]"></div>
         <a href="/" className="py-4">
             <Image src="/logo.png" width={297} height={297} alt="Logo" quality={100} />
         </a>
-        <ul className="flex-column my-auto gap-5">
-            {settings.data.navigation.map(({link, label})=>(
-                <li key={label} className="opacity-75 hover:opacity-100 transition-opacity duration-200 ease-in-out">
-                    <PrismicNextLink field={link}>{label}</PrismicNextLink>
-                </li>
-            ))}
-        </ul>
     </Bounded>;
 }
