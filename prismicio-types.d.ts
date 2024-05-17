@@ -512,6 +512,161 @@ type HeroSliceVariation = HeroSliceDefault;
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 /**
+ * Primary content in *Introduction → Primary*
+ */
+export interface IntroductionSliceDefaultPrimary {
+  /**
+   * Heading field in *Introduction → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: introduction.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.TitleField;
+
+  /**
+   * Body field in *Introduction → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: introduction.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Button Text field in *Introduction → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: introduction.primary.button_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button_text: prismic.KeyTextField;
+
+  /**
+   * Button Link field in *Introduction → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: introduction.primary.button_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button_link: prismic.LinkField;
+
+  /**
+   * Image field in *Introduction → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: introduction.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for Introduction Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type IntroductionSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<IntroductionSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *Introduction → Primary*
+ */
+export interface IntroductionSliceImageFirstPrimary {
+  /**
+   * Image field in *Introduction → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: introduction.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Heading field in *Introduction → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: introduction.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.TitleField;
+
+  /**
+   * Body field in *Introduction → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: introduction.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Button Text field in *Introduction → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: introduction.primary.button_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button_text: prismic.KeyTextField;
+
+  /**
+   * Button Link field in *Introduction → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: introduction.primary.button_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button_link: prismic.LinkField;
+}
+
+/**
+ * Image First variation for Introduction Slice
+ *
+ * - **API ID**: `imageFirst`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type IntroductionSliceImageFirst = prismic.SharedSliceVariation<
+  "imageFirst",
+  Simplify<IntroductionSliceImageFirstPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Introduction*
+ */
+type IntroductionSliceVariation =
+  | IntroductionSliceDefault
+  | IntroductionSliceImageFirst;
+
+/**
+ * Introduction Shared Slice
+ *
+ * - **API ID**: `introduction`
+ * - **Description**: Introduction
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type IntroductionSlice = prismic.SharedSlice<
+  "introduction",
+  IntroductionSliceVariation
+>;
+
+/**
  * Primary content in *Results → Items*
  */
 export interface ResultsSliceDefaultItem {
@@ -629,6 +784,12 @@ declare module "@prismicio/client" {
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      IntroductionSlice,
+      IntroductionSliceDefaultPrimary,
+      IntroductionSliceImageFirstPrimary,
+      IntroductionSliceVariation,
+      IntroductionSliceDefault,
+      IntroductionSliceImageFirst,
       ResultsSlice,
       ResultsSliceDefaultItem,
       ResultsSliceVariation,
