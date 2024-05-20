@@ -35,7 +35,7 @@ const components = {
     <Heading
       as="h4"
       size="xxs"
-      className="tracking-wider mt-14 mb-6"
+      className="tracking-wider mt-12 mb-6"
     >
       {children}
     </Heading>
@@ -90,12 +90,12 @@ const GetOnList = ({ slice }) => {
           field={slice.primary.body3}
           components={components} 
         />
-        <div className="text-center flex flex-col gap-11">
+        <div className="text-center flex flex-col gap-4 -mt-8">
           {slice.items.map((item, index) => (
-            <div className="flex flex-col gap-3" key={index}>
+            <div className="flex flex-col gap-3 bg-[#2b2b2b] rounded-full w-full py-[14px] px-5 relative drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.1)]" key={index}>
               <div className="flex justify-center gap-3 flex-wrap">
-                <p className="text-[13px] tracking-wider leading-7">{item.code}</p>
-                <div className="relative">
+                <p className="text-[13px] tracking-wide leading-7">{item.code}</p>
+                <div className="flex relative">
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     width="14" 
@@ -107,7 +107,7 @@ const GetOnList = ({ slice }) => {
                     <path fill="#fff" d="M12.33.33H5.67c-.74 0-1.34.6-1.34 1.34v2.66H1.67c-.74 0-1.34.6-1.34 1.34v6.66c0 .74.6 1.34 1.34 1.34h6.66c.74 0 1.34-.6 1.34-1.34V9.67h2.66c.74 0 1.34-.6 1.34-1.34V1.67c0-.74-.6-1.34-1.34-1.34Zm-10.66 12V5.67h6.66v6.66H1.67Zm10.66-4H9.67V5.67c0-.74-.6-1.34-1.34-1.34H5.67V1.67h6.66v6.66Z"/>
                   </svg>
                   {lastCopiedIndex === index && (
-                    <span className="text-[13px] tracking-wider absolute -top-5 left-1/2 transform -translate-x-1/2">Kopieret!</span>
+                    <span className="bg-darkGray py-2 px-3 rounded-xl text-[12px] text-[#e7e7e7] font-normal tracking-wider absolute -top-8 right-2">Kopieret!</span>
                   )}
                 </div>
               </div>
