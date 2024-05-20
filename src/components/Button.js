@@ -4,7 +4,7 @@ import { PrismicNextLink } from '@prismicio/next';
 export default function Button({ className, ...restProps }) {
     return (
         <PrismicNextLink 
-            className={clsx('font-medium flex text-white tracking-wider justify-center items-center rounded-full transition-colors duration-200 ease-in-out', className)}
+            className={clsx('flex text-white tracking-wider justify-center items-center rounded-full transition-colors duration-200 ease-in-out', className)}
             {...restProps}
         />
     );

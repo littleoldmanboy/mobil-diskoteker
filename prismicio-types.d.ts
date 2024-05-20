@@ -58,7 +58,11 @@ export type FilterButtonDocument<Lang extends string = string> =
     Lang
   >;
 
-type HomepageDocumentDataSlicesSlice = StepsSlice | ResultsSlice | HeroSlice;
+type HomepageDocumentDataSlicesSlice =
+  | IntroductionSlice
+  | StepsSlice
+  | ResultsSlice
+  | HeroSlice;
 
 /**
  * Content for Homepage documents
@@ -133,6 +137,70 @@ export type HomepageDocument<Lang extends string = string> =
     "homepage",
     Lang
   >;
+
+type PageDocumentDataSlicesSlice =
+  | ContactFormSlice
+  | GetOnListSlice
+  | HeroSlice;
+
+/**
+ * Content for Page documents
+ */
+interface PageDocumentData {
+  /**
+   * Slice Zone field in *Page*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<PageDocumentDataSlicesSlice> /**
+   * Meta Title field in *Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: page.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: page.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Page document from Prismic
+ *
+ * - **API ID**: `page`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type PageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
 /**
  * Item in *Result → Locations*
@@ -435,9 +503,195 @@ export type StepDocument<Lang extends string = string> =
 export type AllDocumentTypes =
   | FilterButtonDocument
   | HomepageDocument
+  | PageDocument
   | ResultDocument
   | SettingsDocument
   | StepDocument;
+
+/**
+ * Primary content in *ContactForm → Primary*
+ */
+export interface ContactFormSliceDefaultPrimary {
+  /**
+   * Heading field in *ContactForm → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Button Link field in *ContactForm → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form.primary.button_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button_link: prismic.LinkField;
+
+  /**
+   * Button Text field in *ContactForm → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form.primary.button_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button_text: prismic.KeyTextField;
+
+  /**
+   * Outro field in *ContactForm → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form.primary.outro
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  outro: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *ContactForm → Items*
+ */
+export interface ContactFormSliceDefaultItem {
+  /**
+   * Field Title field in *ContactForm → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form.items[].field_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  field_title: prismic.KeyTextField;
+
+  /**
+   * Field Placeholder field in *ContactForm → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form.items[].field_placeholder
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  field_placeholder: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for ContactForm Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactFormSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ContactFormSliceDefaultPrimary>,
+  Simplify<ContactFormSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *ContactForm*
+ */
+type ContactFormSliceVariation = ContactFormSliceDefault;
+
+/**
+ * ContactForm Shared Slice
+ *
+ * - **API ID**: `contact_form`
+ * - **Description**: ContactForm
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactFormSlice = prismic.SharedSlice<
+  "contact_form",
+  ContactFormSliceVariation
+>;
+
+/**
+ * Primary content in *GetOnList → Items*
+ */
+export interface GetOnListSliceDefaultItem {
+  /**
+   * Heading field in *GetOnList → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: get_on_list.items[].heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Body field in *GetOnList → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: get_on_list.items[].body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Code field in *GetOnList → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: get_on_list.items[].code
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  code: prismic.KeyTextField;
+
+  /**
+   * Link field in *GetOnList → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: get_on_list.items[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+
+  /**
+   * Link Text field in *GetOnList → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: get_on_list.items[].link_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  link_text: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for GetOnList Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type GetOnListSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  Simplify<GetOnListSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *GetOnList*
+ */
+type GetOnListSliceVariation = GetOnListSliceDefault;
+
+/**
+ * GetOnList Shared Slice
+ *
+ * - **API ID**: `get_on_list`
+ * - **Description**: GetOnList
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type GetOnListSlice = prismic.SharedSlice<
+  "get_on_list",
+  GetOnListSliceVariation
+>;
 
 /**
  * Primary content in *Hero → Primary*
@@ -498,9 +752,47 @@ export type HeroSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *Hero → Primary*
+ */
+export interface HeroSliceNoButtonPrimary {
+  /**
+   * Heading field in *Hero → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.TitleField;
+
+  /**
+   * Body field in *Hero → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+}
+
+/**
+ * No Button variation for Hero Slice
+ *
+ * - **API ID**: `noButton`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HeroSliceNoButton = prismic.SharedSliceVariation<
+  "noButton",
+  Simplify<HeroSliceNoButtonPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *Hero*
  */
-type HeroSliceVariation = HeroSliceDefault;
+type HeroSliceVariation = HeroSliceDefault | HeroSliceNoButton;
 
 /**
  * Hero Shared Slice
@@ -768,6 +1060,9 @@ declare module "@prismicio/client" {
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
+      PageDocument,
+      PageDocumentData,
+      PageDocumentDataSlicesSlice,
       ResultDocument,
       ResultDocumentData,
       ResultDocumentDataLocationsItem,
@@ -780,10 +1075,21 @@ declare module "@prismicio/client" {
       StepDocumentData,
       StepDocumentDataFilterButtonsItem,
       AllDocumentTypes,
+      ContactFormSlice,
+      ContactFormSliceDefaultPrimary,
+      ContactFormSliceDefaultItem,
+      ContactFormSliceVariation,
+      ContactFormSliceDefault,
+      GetOnListSlice,
+      GetOnListSliceDefaultItem,
+      GetOnListSliceVariation,
+      GetOnListSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimary,
+      HeroSliceNoButtonPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      HeroSliceNoButton,
       IntroductionSlice,
       IntroductionSliceDefaultPrimary,
       IntroductionSliceImageFirstPrimary,

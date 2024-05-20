@@ -1,0 +1,68 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					[
+						"heading",
+						{
+							"__TYPE__": "StructuredTextContent",
+							"value": [
+								{
+									"type": "heading2",
+									"content": {
+										"text": "Drink"
+									}
+								}
+							]
+						}
+					],
+					[
+						"body",
+						{
+							"__TYPE__": "StructuredTextContent",
+							"value": [
+								{
+									"type": "paragraph",
+									"content": {
+										"text": "Eu sit non aliqua duis fugiat elit officia veniam irure nisi mollit dolore. Non nostrud laboris quis dolor adipisicing nostrud excepteur. Minim deserunt magna incididunt sunt velit aliqua."
+									}
+								}
+							]
+						}
+					],
+					[
+						"link",
+						{
+							"__TYPE__": "LinkContent",
+							"value": {
+								"__TYPE__": "ExternalLink",
+								"url": "https://prismic.io"
+							}
+						}
+					],
+					[
+						"code",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "lamp",
+							"type": "Text"
+						}
+					],
+					[
+						"link_text",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "shop",
+							"type": "Text"
+						}
+					]
+				]
+			}
+		]
+	}
+]

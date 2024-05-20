@@ -1,30 +1,26 @@
 {
   "format": "page",
-  "id": "homepage",
-  "label": "Homepage",
-  "repeatable": false,
+  "id": "page",
+  "label": "Page",
+  "repeatable": true,
   "status": true,
   "json": {
     "Main": {
-      "title": {
-        "type": "Text",
+      "uid": {
         "config": {
-          "label": "Title",
-          "placeholder": ""
-        }
+          "label": "UID"
+        },
+        "type": "UID"
       },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "introduction": {
+            "contact_form": {
               "type": "SharedSlice"
             },
-            "steps": {
-              "type": "SharedSlice"
-            },
-            "results": {
+            "get_on_list": {
               "type": "SharedSlice"
             },
             "hero": {
