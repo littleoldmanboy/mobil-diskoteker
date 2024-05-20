@@ -10,6 +10,8 @@ export default function Heading({
             size === "lg" && "md:text-4xl text-3xl",
             size === "md" && "md:text-3xl text-2xl",
             size === "sm" && "md:text-2xl text-xl",
+            size === "xs" && "md:text-xl text-lg",
+            size === "xxs" && "md:text-base text-sm",
             className
         )}>
             {children}

@@ -2,39 +2,100 @@
 	{
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
-		"primary": {},
+		"primary": {
+			"heading1": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Graph"
+						}
+					}
+				]
+			},
+			"body1": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Cillum laboris aliquip aliqua culpa irure duis consequat consequat sunt."
+						}
+					}
+				]
+			},
+			"heading2": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Pattern"
+						}
+					}
+				]
+			},
+			"body2": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Laborum consequat sint excepteur occaecat est adipisicing sunt officia irure est ut quis labore et."
+						}
+					}
+				]
+			},
+			"heading3": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading3",
+						"content": {
+							"text": "Teach"
+						}
+					}
+				]
+			},
+			"body3": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Ea eu ullamco sit dolor."
+						}
+					}
+				]
+			},
+			"heading4": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading4",
+						"content": {
+							"text": "Observe"
+						}
+					}
+				]
+			},
+			"body4": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Excepteur elit nulla esse. Consectetur veniam et commodo."
+						}
+					}
+				]
+			}
+		},
 		"items": [
 			{
 				"__TYPE__": "GroupItemContent",
 				"value": [
-					[
-						"heading",
-						{
-							"__TYPE__": "StructuredTextContent",
-							"value": [
-								{
-									"type": "heading2",
-									"content": {
-										"text": "Drink"
-									}
-								}
-							]
-						}
-					],
-					[
-						"body",
-						{
-							"__TYPE__": "StructuredTextContent",
-							"value": [
-								{
-									"type": "paragraph",
-									"content": {
-										"text": "Eu sit non aliqua duis fugiat elit officia veniam irure nisi mollit dolore. Non nostrud laboris quis dolor adipisicing nostrud excepteur. Minim deserunt magna incididunt sunt velit aliqua."
-									}
-								}
-							]
-						}
-					],
 					[
 						"link",
 						{

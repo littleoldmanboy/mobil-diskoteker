@@ -609,29 +609,94 @@ export type ContactFormSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *GetOnList → Primary*
+ */
+export interface GetOnListSliceDefaultPrimary {
+  /**
+   * Heading1 field in *GetOnList → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: get_on_list.primary.heading1
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading1: prismic.TitleField;
+
+  /**
+   * Body1 field in *GetOnList → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: get_on_list.primary.body1
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body1: prismic.RichTextField;
+
+  /**
+   * Heading2 field in *GetOnList → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: get_on_list.primary.heading2
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading2: prismic.TitleField;
+
+  /**
+   * Body2 field in *GetOnList → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: get_on_list.primary.body2
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body2: prismic.RichTextField;
+
+  /**
+   * Heading3 field in *GetOnList → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: get_on_list.primary.heading3
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading3: prismic.TitleField;
+
+  /**
+   * Body3 field in *GetOnList → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: get_on_list.primary.body3
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body3: prismic.RichTextField;
+
+  /**
+   * Heading4 field in *GetOnList → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: get_on_list.primary.heading4
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading4: prismic.TitleField;
+
+  /**
+   * Body4 field in *GetOnList → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: get_on_list.primary.body4
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body4: prismic.RichTextField;
+}
+
+/**
  * Primary content in *GetOnList → Items*
  */
 export interface GetOnListSliceDefaultItem {
-  /**
-   * Heading field in *GetOnList → Items*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: get_on_list.items[].heading
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  heading: prismic.RichTextField;
-
-  /**
-   * Body field in *GetOnList → Items*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: get_on_list.items[].body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
-
   /**
    * Code field in *GetOnList → Items*
    *
@@ -672,7 +737,7 @@ export interface GetOnListSliceDefaultItem {
  */
 export type GetOnListSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Record<string, never>,
+  Simplify<GetOnListSliceDefaultPrimary>,
   Simplify<GetOnListSliceDefaultItem>
 >;
 
@@ -1081,6 +1146,7 @@ declare module "@prismicio/client" {
       ContactFormSliceVariation,
       ContactFormSliceDefault,
       GetOnListSlice,
+      GetOnListSliceDefaultPrimary,
       GetOnListSliceDefaultItem,
       GetOnListSliceVariation,
       GetOnListSliceDefault,

@@ -20,7 +20,7 @@ const components = {
     </Heading>
   ),
   paragraph: ({ children }) => (
-    <p className="text-[13px] font-normal text-center tracking-widest text-white opacity-60 max-w-72 mt-[40px] leading-tight">
+    <p className="text-[13px] font-normal text-center tracking-widest text-white opacity-60 max-w-72 mt-[40px] leading-snug">
       {children}
     </p>
   ),
