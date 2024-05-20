@@ -33,6 +33,7 @@ const Hero = ({ slice }) => {
         <Bounded
           data-slice-type={slice.slice_type}
           data-slice-variation={slice.variation}
+          id="home"
           className="h-svh flex justify-center lg:col-span-2 relative"
         >
           <div className="flex flex-col items-center justify-center">
@@ -51,7 +52,7 @@ const Hero = ({ slice }) => {
             </span>
           </div>
           <a
-            href="/"
+            href="#arrow-target"
             className="absolute bottom-8 opacity-40 cursor-pointer hover:opacity-100 transition-opacity duration-200 ease-in-out p-3"
           >
             <svg
@@ -74,6 +75,7 @@ const Hero = ({ slice }) => {
         <Bounded
           data-slice-type={slice.slice_type}
           data-slice-variation={slice.variation}
+          id="get-on-list"
           className="pt-40 pb-28 flex justify-center lg:col-span-2"
         >
           <div className="flex flex-col items-center justify-center">

@@ -46,7 +46,7 @@ export default function Logo() {
   };
 
   return (
-    <a href='/' className='py-4'
+    <a href='/#home' className='py-4'
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

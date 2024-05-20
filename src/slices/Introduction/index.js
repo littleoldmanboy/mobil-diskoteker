@@ -30,7 +30,7 @@ const components = {
 const Introduction = ({ slice }) => {
   return (
     <>
-      <div className="relative">
+      <div id="arrow-target" className="relative">
         {slice.variation === "default" && (
           <Bounded
             data-slice-type={slice.slice_type}

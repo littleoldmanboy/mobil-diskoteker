@@ -26,6 +26,7 @@ const Steps = async ({ slice }) => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      id="steps"
       className="lg:h-svh flex relative"
     >
       <div className="relative lg:h-[711px] my-auto py-6 w-full">

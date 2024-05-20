@@ -131,7 +131,7 @@ export default function StepsMenu({ steps }) {
 
                           <TooltipProvider delayDuration={250}>
                             <Tooltip>
-                              <TooltipTrigger className="absolute top-[-6px] right-0 bg-darkGray h-5 w-5 text-[13px] font-normal text-[#a7a7a7] rounded-full transition-colors duration-200 ease-in-out border border-[#6a6a6a] hover:bg-[#303030] hover:text-white">
+                              <TooltipTrigger className="hidden md:block absolute top-[-6px] right-0 bg-darkGray h-5 w-5 text-[13px] font-normal text-[#a7a7a7] rounded-full transition-colors duration-200 ease-in-out border border-[#6a6a6a] hover:bg-[#303030] hover:text-white">
                                 i
                               </TooltipTrigger>
                               <TooltipContent className="text-center bg-[#2b2b2b] py-3 px-4 mt-2 rounded-xl text-[#e7e7e7] text-[13px] font-normal tracking-wider">
