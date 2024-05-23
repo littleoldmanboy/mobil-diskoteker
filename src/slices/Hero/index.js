@@ -45,7 +45,7 @@ const Hero = ({ slice }) => {
             <span className="bg-gradient-to-r	from-purpleIsh to-greenIsh rounded-full p-px mt-[18px] drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.25)]">
               <Button
                 field={slice.primary.button_link}
-                className="text-[15px] font-medium w-[110px] h-[58px] bg-[#303030] hover:bg-[#3a3a3a]"
+                className="text-[15px] font-medium w-[110px] h-[58px] bg-[#2d2e2f] hover:bg-[#393a3b]"
               >
                 {slice.primary.button_text}
               </Button>

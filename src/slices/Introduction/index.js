@@ -47,7 +47,7 @@ const Introduction = ({ slice }) => {
                 <span className="bg-gradient-to-r	from-purpleIsh to-greenIsh rounded-full p-px mt-11 drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.25)]">
                   <Button
                     field={slice.primary.button_link}
-                    className="text-xs w-[82px] h-[46px] bg-[#303030] hover:bg-[#3a3a3a]"
+                    className="text-xs w-[82px] h-[46px] bg-[#2d2e2f] hover:bg-[#393a3b]"
                   >
                     {slice.primary.button_text}
                   </Button>
@@ -85,7 +85,7 @@ const Introduction = ({ slice }) => {
                   <span className="bg-gradient-to-r	from-purpleIsh to-greenIsh rounded-full p-px mt-11 drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.25)]">
                     <Button
                       field={slice.primary.button_link}
-                      className="text-xs w-[82px] h-[46px] bg-[#303030] hover:bg-[#3a3a3a]"
+                      className="text-xs w-[82px] h-[46px] bg-[#2d2e2f] hover:bg-[#393a3b]"
                     >
                       {slice.primary.button_text}
                     </Button>

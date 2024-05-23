@@ -36,7 +36,7 @@ export default function ResultsMenu({ results }) {
           item && (
             <div
               key={index}
-              className="flex flex-col sm:flex-row p-4 bg-[#2b2b2b] rounded-3xl justify-between drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.1)]"
+              className="flex flex-col sm:flex-row p-4 bg-[#262729] rounded-3xl justify-between drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.1)]"
             >
               <div className="flex flex-col sm:flex-row">
                 <PrismicNextImage
@@ -81,7 +81,7 @@ export default function ResultsMenu({ results }) {
               </div>
               <Button
                 field={item.button_link}
-                className="text-[13px] w-[85px] h-[56px] border border-[#6a6a6a] hover:bg-[#3a3a3a] self-center sm:self-end"
+                className="text-[13px] w-[85px] h-[56px] border border-[#6a6a6a] hover:bg-[#393a3b] self-center sm:self-end"
               >
                 Book
               </Button>

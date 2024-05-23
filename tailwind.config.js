@@ -22,7 +22,7 @@ module.exports = {
         "svh-minus-52": "calc(100vh - 52px)",
       },
       colors: {
-        darkGray: "#222222", // Custom gray
+        darkGray: "#1D1E20", // Custom gray
         purpleIsh: "#7878FF", // Custom purple
         greenIsh: "#85FFCD", // Custom green
         border: "hsl(var(--border))",
