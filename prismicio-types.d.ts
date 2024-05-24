@@ -509,76 +509,6 @@ export type AllDocumentTypes =
   | StepDocument;
 
 /**
- * Primary content in *ContactForm → Primary*
- */
-export interface ContactFormSliceDefaultPrimary {
-  /**
-   * Heading field in *ContactForm → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact_form.primary.heading
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  heading: prismic.RichTextField;
-
-  /**
-   * Button Link field in *ContactForm → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact_form.primary.button_link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  button_link: prismic.LinkField;
-
-  /**
-   * Button Text field in *ContactForm → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact_form.primary.button_text
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  button_text: prismic.KeyTextField;
-
-  /**
-   * Outro field in *ContactForm → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact_form.primary.outro
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  outro: prismic.RichTextField;
-}
-
-/**
- * Primary content in *ContactForm → Items*
- */
-export interface ContactFormSliceDefaultItem {
-  /**
-   * Field Title field in *ContactForm → Items*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact_form.items[].field_title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  field_title: prismic.KeyTextField;
-
-  /**
-   * Field Placeholder field in *ContactForm → Items*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact_form.items[].field_placeholder
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  field_placeholder: prismic.KeyTextField;
-}
-
-/**
  * Default variation for ContactForm Slice
  *
  * - **API ID**: `default`
@@ -587,8 +517,8 @@ export interface ContactFormSliceDefaultItem {
  */
 export type ContactFormSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Simplify<ContactFormSliceDefaultPrimary>,
-  Simplify<ContactFormSliceDefaultItem>
+  Record<string, never>,
+  never
 >;
 
 /**
@@ -1141,8 +1071,6 @@ declare module "@prismicio/client" {
       StepDocumentDataFilterButtonsItem,
       AllDocumentTypes,
       ContactFormSlice,
-      ContactFormSliceDefaultPrimary,
-      ContactFormSliceDefaultItem,
       ContactFormSliceVariation,
       ContactFormSliceDefault,
       GetOnListSlice,

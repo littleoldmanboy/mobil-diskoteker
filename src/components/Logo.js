@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 
 export default function Logo() {
   const videoRef = useRef(null);
@@ -46,12 +46,14 @@ export default function Logo() {
   };
 
   return (
-    <a href='/#home' className='py-4'
+    <a
+      href="/#home"
+      className="py-4"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <video
-        className='cursor-pointer'
+        className="cursor-pointer"
         ref={videoRef}
         width="300"
         height="300"
@@ -62,7 +64,7 @@ export default function Logo() {
         }}
         muted
         preload="auto"
-        style={{ width: 'auto', height: '20px' }}
+        style={{ width: "auto", height: "20px" }}
       >
         <source src="/logo-animation.mp4" type="video/mp4" />
         Logo animation (your browser does not support the video tag)

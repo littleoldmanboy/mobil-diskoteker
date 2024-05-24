@@ -92,7 +92,7 @@ const GetOnList = ({ slice }) => {
         />
         <div className="text-center flex flex-col gap-4 -mt-8">
           {slice.items.map((item, index) => (
-            <div className="flex flex-col gap-3 bg-[#2b2b2b] rounded-full w-full py-[14px] px-5 relative drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.1)]" key={index}>
+            <div className="flex flex-col gap-3 bg-[#262729] rounded-full w-full py-[14px] px-5 relative drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.1)]" key={index}>
               <div className="flex justify-center gap-3 flex-wrap">
                 <p className="text-[13px] tracking-wide leading-7">{item.code}</p>
                 <div className="flex relative">

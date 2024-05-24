@@ -150,7 +150,7 @@ export default function StepsMenu({ steps }) {
                 {((index !== steps.length - 1 && choices[index + 1]) ||
                   index === 2) && (
                   <button
-                    className="my-3 py-[15px] px-[17px] w-fit text-[12px] font-normal text-white flex tracking-wider justify-center items-center rounded-full transition-all duration-200 ease-in-out border border-[#6a6a6a] hover:bg-[#303030] bg-darkGray drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.1)]"
+                    className="my-3 py-[15px] px-[17px] w-fit text-[12px] font-normal text-white flex tracking-wider justify-center items-center rounded-full transition-all duration-200 ease-in-out border border-[#6a6a6a] hover:bg-[#2d2e2f] bg-darkGray drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.1)]"
                     onClick={() => {
                       if (index === 2) {
                         setChoice(3, price[0]);

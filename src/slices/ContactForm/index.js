@@ -1,3 +1,5 @@
+import Contact from "@/components/Contact";
+
 /**
  * @typedef {import("@prismicio/client").Content.ContactFormSlice} ContactFormSlice
  * @typedef {import("@prismicio/react").SliceComponentProps<ContactFormSlice>} ContactFormProps
@@ -9,8 +11,7 @@ const ContactForm = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      Placeholder component for contact_form (variation: {slice.variation})
-      Slices
+      <Contact />
     </section>
   );
 };
