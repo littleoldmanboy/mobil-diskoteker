@@ -1,3 +1,4 @@
+import Bounded from "@/components/Bounded";
 import Contact from "@/components/Contact";
 
 /**
@@ -7,12 +8,12 @@ import Contact from "@/components/Contact";
  */
 const ContactForm = ({ slice }) => {
   return (
-    <section
+    <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
       <Contact />
-    </section>
+    </Bounded>
   );
 };
 

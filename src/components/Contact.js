@@ -16,10 +16,16 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "./ui/checkbox";
+import {
+  sendOwnerConfirmationEmail,
+  sendUserConfirmationEmail,
+} from "@/actions/email.actions";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
-const locations = ["København", "Aarhus", "Odense"];
+const locations = ["Nord- Midtjylland", "Syddanmark", "Sjælland"];
 
-const musics = ["Pop", "Rock", "Rap", "Techno"];
+const musics = ["Pop", "Elektronisk", "Classics", "Jazz"];
 
 const formSchema = z.object({
   title: z
@@ -31,10 +37,10 @@ const formSchema = z.object({
       message: "Titlen må maks være 100 tegn lang",
     }),
   locations: z.array(z.boolean()).refine((v) => v.some((x) => x), {
-    message: "Der skal være mindst ét valgt område",
+    message: "Der skal være valgt mindst én lokation",
   }),
   musics: z.array(z.boolean()).refine((v) => v.some((x) => x), {
-    message: "Der skal være mindst én valgt stilart",
+    message: "Der skal være valgt mindst én slags musik",
   }),
   price: z
     .string()
@@ -56,6 +62,7 @@ const formSchema = z.object({
 });
 
 export default function Contact() {
+  const [status, setStatus] = useState("");
   // 1. Define your form.
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -71,7 +78,7 @@ export default function Contact() {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values) {
+  async function onSubmit(values) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     const body = {
@@ -83,13 +90,33 @@ export default function Contact() {
         .map((v, i) => (v ? musics[i] : null))
         .filter((v) => v),
     };
-    console.log(body);
+
+    const userEmail = await sendUserConfirmationEmail(body);
+    const ownerEmail = await sendOwnerConfirmationEmail(body);
+
+    if (userEmail === "success" && ownerEmail === "success") {
+      form.reset();
+      setStatus("success");
+      return;
+    }
+    setStatus("error");
   }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setStatus("");
+    }, 3000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [status]);
+
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 text-white"
+        className="text-white tracking-wider"
       >
         <FormField
           control={form.control}
@@ -176,7 +203,7 @@ export default function Contact() {
             <FormItem>
               <FormLabel>Minimumspris:</FormLabel>
               <FormControl>
-                <Input placeholder="Mobildiskotek-/DJ-navn" {...field} />
+                <Input placeholder="Minimumspris i danske kroner" {...field} />
               </FormControl>
 
               <FormMessage />
@@ -190,7 +217,7 @@ export default function Contact() {
             <FormItem>
               <FormLabel>Hjemmeside-URL:</FormLabel>
               <FormControl>
-                <Input placeholder="Mobildiskotek-/DJ-navn" {...field} />
+                <Input placeholder="Link til din hjemmeside" {...field} />
               </FormControl>
 
               <FormMessage />
@@ -204,7 +231,10 @@ export default function Contact() {
             <FormItem>
               <FormLabel>Link-URL:</FormLabel>
               <FormControl>
-                <Input placeholder="Mobildiskotek-/DJ-navn" {...field} />
+                <Input
+                  placeholder="Specifikt til hvor du har sat et af vores links ind"
+                  {...field}
+                />
               </FormControl>
 
               <FormMessage />
@@ -218,13 +248,18 @@ export default function Contact() {
             <FormItem>
               <FormLabel>Din email:</FormLabel>
               <FormControl>
-                <Input placeholder="Mobildiskotek-/DJ-navn" {...field} />
+                <Input placeholder="dinemail@adresse.com" {...field} />
               </FormControl>
 
               <FormMessage />
             </FormItem>
           )}
         />
+        {status && (
+          <FormMessage className={cn(status === "success" && "text-green-500")}>
+            {status === "success" ? "Succes!" : "Fejl! Prøv igen."}
+          </FormMessage>
+        )}
         <Button type="submit">Send</Button>
       </form>
     </Form>
