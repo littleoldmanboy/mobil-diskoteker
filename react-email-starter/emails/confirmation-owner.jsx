@@ -18,32 +18,53 @@ import {
 import * as React from "react";
 
 export default function ConfirmationOwner({
-  title = "Børge",
-  locations = ["København", "Aarhus"],
-  musics = ["Pop", "Rock"],
-  price = "5000",
-  url = "https://example.com",
-  link = "https://another_example.com",
-  email = "morten@hansekattesuppe.dk",
+  title = "LittleOldManBoy",
+  locations = ["Nord-Midtjylland", "Syddanmark", "Sjælland"],
+  musics = ["Pop", "Elektronisk", "Classics", "Jazz"],
+  price = "3499",
+  url = "https://dennisrussell.dk",
+  link = "https://dennisrussell.dk",
+  email = "dennis.g.leerup@hotmail.com",
 }) {
   return (
     <Html>
       <Head />
-      <Preview>Bekræftelsesmail på: {title}</Preview>
+      <Preview>Mail fra: {title}</Preview>
       <Tailwind>
         <Body className="bg-white my-auto mx-auto font-sans px-2">
-          <Text>From: {email}</Text>
-          <Text>{title}</Text>
+          <Heading as="h6">Fra: {email}</Heading>
+          <Heading className="mb-8" as="h1">
+            {title}
+          </Heading>
+          <Heading as="h3">Område(r):</Heading>
           {locations.map((location) => (
-            <Text key={location}>{location}</Text>
+            <Heading className="opacity-90" as="h5" key={location}>
+              - {location}
+            </Heading>
           ))}
+          <Heading className="mt-8" as="h3">
+            Musikstilart(er):
+          </Heading>
           {musics.map((music) => (
-            <Text key={music}>{music}</Text>
+            <Heading className="opacity-90" as="h5" key={music}>
+              - {music}
+            </Heading>
           ))}
-          <Text>{price}</Text>
+          <Heading className="mt-8" as="h3">
+            Minimumspris:
+          </Heading>
+          <Heading className="opacity-90" as="h5">
+            {price} kr.
+          </Heading>
+          <Heading className="mt-8" as="h3">
+            Hjemmeside-URL:
+          </Heading>
           <Link href={url} className="text-blue-500 hover:text-blue-700 block">
             {url}
           </Link>
+          <Heading className="mt-8" as="h3">
+            Link-URL:
+          </Heading>
           <Link href={link} className="text-blue-500 hover:text-blue-700 block">
             {link}
           </Link>

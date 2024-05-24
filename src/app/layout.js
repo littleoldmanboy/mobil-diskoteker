@@ -12,11 +12,13 @@ export async function generateMetadata() {
   const settings = await client.getSingle("settings");
   return {
     title: settings.data.site_title || "Mobil-Diskoteker",
-    description: settings.data.meta_description || "Udforsk geografiske lister og find de bedste mobildiskoteker og DJ's i Danmark - perfekt til dit næste arrangement",
+    description:
+      settings.data.meta_description ||
+      "Udforsk geografiske lister og find de bedste mobildiskoteker og DJ's i Danmark - perfekt til dit næste arrangement",
     openGraph: {
       images: [settings.data.og_image.url || ""],
     },
-  }
+  };
 }
 
 export default function RootLayout({ children }) {

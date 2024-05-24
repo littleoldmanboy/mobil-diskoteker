@@ -509,6 +509,31 @@ export type AllDocumentTypes =
   | StepDocument;
 
 /**
+ * Primary content in *ContactForm → Primary*
+ */
+export interface ContactFormSliceDefaultPrimary {
+  /**
+   * Heading field in *ContactForm → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.TitleField;
+
+  /**
+   * Outro field in *ContactForm → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form.primary.outro
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  outro: prismic.RichTextField;
+}
+
+/**
  * Default variation for ContactForm Slice
  *
  * - **API ID**: `default`
@@ -517,7 +542,7 @@ export type AllDocumentTypes =
  */
 export type ContactFormSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Record<string, never>,
+  Simplify<ContactFormSliceDefaultPrimary>,
   never
 >;
 
@@ -1071,6 +1096,7 @@ declare module "@prismicio/client" {
       StepDocumentDataFilterButtonsItem,
       AllDocumentTypes,
       ContactFormSlice,
+      ContactFormSliceDefaultPrimary,
       ContactFormSliceVariation,
       ContactFormSliceDefault,
       GetOnListSlice,

@@ -31,21 +31,21 @@ const formSchema = z.object({
   title: z
     .string()
     .min(2, {
-      message: "Titlen skal være mindst 2 tegn lang",
+      message: "Titlen skal indeholde mindst 2 tegn",
     })
     .max(100, {
-      message: "Titlen må maks være 100 tegn lang",
+      message: "Titlen må maks indeholde 100 tegn",
     }),
   locations: z.array(z.boolean()).refine((v) => v.some((x) => x), {
-    message: "Der skal være valgt mindst én lokation",
+    message: "Der skal vælges mindst ét område",
   }),
   musics: z.array(z.boolean()).refine((v) => v.some((x) => x), {
-    message: "Der skal være valgt mindst én slags musik",
+    message: "Der skal vælges mindst én musikstilart",
   }),
   price: z
     .string()
     .min(1, {
-      message: "Prisen skal være mindst 1 tegn lang",
+      message: "Prisen skal indeholde mindst 1 tegn",
     })
     .refine((v) => !isNaN(Number(v)), {
       message: "Prisen skal være et tal",
@@ -116,19 +116,19 @@ export default function Contact() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="text-white tracking-wider"
+        className="text-white tracking-wider flex flex-col"
       >
         <FormField
           control={form.control}
           name="title"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="relative flex flex-col sm:flex-row items-baseline gap-3">
               <FormLabel>Titel:</FormLabel>
               <FormControl>
                 <Input placeholder="Mobildiskotek-/DJ-navn" {...field} />
               </FormControl>
 
-              <FormMessage />
+              <FormMessage className="absolute -bottom-5 right-0" />
             </FormItem>
           )}
         />
@@ -137,29 +137,34 @@ export default function Contact() {
           control={form.control}
           name="locations"
           render={({ field }) => (
-            <FormItem>
-              {locations.map((location, index) => {
-                return (
-                  <FormField
-                    key={index}
-                    control={form.control}
-                    name={`locations.${index}`}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>{location}</FormLabel>
+            <FormItem className="my-7">
+              <p className="mb-4">Område(r):</p>
+              <div className="flex flex-col gap-3">
+                {locations.map((location, index) => {
+                  return (
+                    <FormField
+                      key={index}
+                      control={form.control}
+                      name={`locations.${index}`}
+                      render={({ field }) => (
+                        <FormItem className="ml-8 flex gap-2 items-end">
+                          <FormLabel className="text-[13px] opacity-90">
+                            {location}
+                          </FormLabel>
 
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                );
-              })}
+                          <FormControl className="-translate-y-[1px]">
+                            <Checkbox
+                              checked={field.value}
+                              onCheckedChange={field.onChange}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  );
+                })}
+              </div>
               <FormMessage />
             </FormItem>
           )}
@@ -168,7 +173,8 @@ export default function Contact() {
           control={form.control}
           name="musics"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="mb-7">
+              <p className="mb-4">Musikstilart(er):</p>
               {musics.map((music, index) => {
                 return (
                   <FormField
@@ -176,10 +182,11 @@ export default function Contact() {
                     control={form.control}
                     name={`musics.${index}`}
                     render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>{music}</FormLabel>
-
-                        <FormControl>
+                      <FormItem className="ml-8 flex gap-2 items-end">
+                        <FormLabel className="text-[13px] opacity-90">
+                          {music}
+                        </FormLabel>
+                        <FormControl className="-translate-y-[1px]">
                           <Checkbox
                             checked={field.value}
                             onCheckedChange={field.onChange}
@@ -200,13 +207,13 @@ export default function Contact() {
           control={form.control}
           name="price"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Minimumspris:</FormLabel>
+            <FormItem className="relative flex flex-col sm:flex-row items-baseline gap-3 mb-7">
+              <FormLabel className="min-w-fit">Minimumspris:</FormLabel>
               <FormControl>
                 <Input placeholder="Minimumspris i danske kroner" {...field} />
               </FormControl>
 
-              <FormMessage />
+              <FormMessage className="absolute -bottom-5 right-0" />
             </FormItem>
           )}
         />
@@ -214,13 +221,13 @@ export default function Contact() {
           control={form.control}
           name="url"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Hjemmeside-URL:</FormLabel>
+            <FormItem className="relative flex flex-col sm:flex-row items-baseline gap-3">
+              <FormLabel className="min-w-fit">Hjemmeside-URL:</FormLabel>
               <FormControl>
                 <Input placeholder="Link til din hjemmeside" {...field} />
               </FormControl>
 
-              <FormMessage />
+              <FormMessage className="absolute -bottom-5 right-0" />
             </FormItem>
           )}
         />
@@ -228,8 +235,8 @@ export default function Contact() {
           control={form.control}
           name="link"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Link-URL:</FormLabel>
+            <FormItem className="relative flex flex-col sm:flex-row items-baseline gap-3 mt-4">
+              <FormLabel className="min-w-fit">Link-URL:</FormLabel>
               <FormControl>
                 <Input
                   placeholder="Specifikt til hvor du har sat et af vores links ind"
@@ -237,7 +244,7 @@ export default function Contact() {
                 />
               </FormControl>
 
-              <FormMessage />
+              <FormMessage className="absolute -bottom-5 right-0" />
             </FormItem>
           )}
         />
@@ -245,13 +252,13 @@ export default function Contact() {
           control={form.control}
           name="email"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Din email:</FormLabel>
+            <FormItem className="relative flex flex-col sm:flex-row items-baseline gap-3 mt-4">
+              <FormLabel className="min-w-fit">Din email:</FormLabel>
               <FormControl>
                 <Input placeholder="dinemail@adresse.com" {...field} />
               </FormControl>
 
-              <FormMessage />
+              <FormMessage className="absolute -bottom-5 right-0" />
             </FormItem>
           )}
         />
@@ -260,7 +267,9 @@ export default function Contact() {
             {status === "success" ? "Succes!" : "Fejl! Prøv igen."}
           </FormMessage>
         )}
-        <Button type="submit">Send</Button>
+        <Button className="mx-auto w-fit mt-6" type="submit">
+          Send
+        </Button>
       </form>
     </Form>
   );
