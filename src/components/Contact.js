@@ -105,7 +105,7 @@ export default function Contact() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setStatus("");
-    }, 3000);
+    }, 4000);
 
     return () => {
       clearTimeout(timer);
@@ -263,7 +263,9 @@ export default function Contact() {
           )}
         />
         {status && (
-          <FormMessage className={cn(status === "success" && "text-green-500")}>
+          <FormMessage
+            className={cn(status === "success" && "text-white mx-auto mt-6")}
+          >
             {status === "success" ? "Succes!" : "Fejl! Prøv igen."}
           </FormMessage>
         )}

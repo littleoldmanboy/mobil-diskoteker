@@ -34,14 +34,17 @@ const Hero = ({ slice }) => {
           data-slice-type={slice.slice_type}
           data-slice-variation={slice.variation}
           id="home"
-          className="h-svh flex justify-center lg:col-span-2 relative"
+          className="h-svh flex justify-center lg:col-span-2 relative max-w-[719px] mx-auto max-[719px]:overflow-hidden"
         >
-          <div className="flex flex-col items-center justify-center">
+          <div className="z-10 flex flex-col items-center justify-center">
             <PrismicRichText
               field={slice.primary.heading}
               components={components}
             />
-            <PrismicRichText field={slice.primary.body} components={components} />
+            <PrismicRichText
+              field={slice.primary.body}
+              components={components}
+            />
             <span className="bg-gradient-to-r	from-purpleIsh to-greenIsh rounded-full p-px mt-[18px] drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.25)]">
               <Button
                 field={slice.primary.button_link}
@@ -53,7 +56,7 @@ const Hero = ({ slice }) => {
           </div>
           <a
             href="#arrow-target"
-            className="absolute bottom-8 opacity-40 cursor-pointer hover:opacity-100 transition-opacity duration-200 ease-in-out p-3"
+            className="z-10 absolute bottom-8 opacity-40 cursor-pointer hover:opacity-100 transition-opacity duration-200 ease-in-out p-3"
           >
             <svg
               width="25"
@@ -68,6 +71,9 @@ const Hero = ({ slice }) => {
               />
             </svg>
           </a>
+          <div className="absolute bg-greenIsh opacity-[0.04] blur-3xl h-64 w-64 md:h-80 md:w-80 rounded-full top-44 -left-16  animate-one"></div>
+          <div className="absolute bg-purpleIsh opacity-[0.04] blur-3xl h-64 w-64 md:h-80 md:w-80 rounded-full top-44 -right-16  animate-two"></div>
+          <div className="absolute bg-white opacity-[0.01] blur-3xl h-60 w-60 md:h-72 md:w-72 rounded-full top-96 left-1/2 transform -translate-x-1/2 animate-three"></div>
           <div className="absolute bottom-0 h-px w-screen bg-[#464646]"></div>
         </Bounded>
       )}
@@ -76,15 +82,21 @@ const Hero = ({ slice }) => {
           data-slice-type={slice.slice_type}
           data-slice-variation={slice.variation}
           id="get-on-list"
-          className="pt-40 pb-28 flex justify-center lg:col-span-2"
+          className="pt-40 pb-28 flex justify-center lg:col-span-2 relative max-w-[700px] mx-auto max-[700px]:overflow-hidden"
         >
-          <div className="flex flex-col items-center justify-center">
+          <div className="z-10 flex flex-col items-center justify-center">
             <PrismicRichText
               field={slice.primary.heading}
               components={components}
             />
-            <PrismicRichText field={slice.primary.body} components={components} />
+            <PrismicRichText
+              field={slice.primary.body}
+              components={components}
+            />
           </div>
+          <div className="absolute bg-greenIsh opacity-[0.04] blur-3xl h-64 w-64 md:h-80 md:w-80 rounded-full top-28 -left-16 animate-four"></div>
+          <div className="absolute bg-purpleIsh opacity-[0.04] blur-3xl h-64 w-64 md:h-80 md:w-80 rounded-full top-28 -right-16  animate-five"></div>
+          <div className="absolute bg-white opacity-[0.01] blur-3xl h-60 w-60 md:h-72 md:w-72 rounded-full top-60 left-1/2 transform -translate-x-1/2 animate-six"></div>
         </Bounded>
       )}
     </>

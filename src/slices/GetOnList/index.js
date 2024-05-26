@@ -13,8 +13,17 @@ import Heading from "@/components/Heading";
  */
 
 const components = {
-  heading2: ({ children }) => (
+  heading1: ({ children }) => (
     <Heading as="h2" size="md" className="tracking-widest mb-6">
+      {children}
+    </Heading>
+  ),
+  heading2: ({ children }) => (
+    <Heading
+      as="h2"
+      size="md"
+      className="tracking-widest mb-6 bg-gradient-to-r from-purpleIsh to-greenIsh text-transparent bg-clip-text"
+    >
       {children}
     </Heading>
   ),
@@ -59,12 +68,12 @@ const GetOnList = ({ slice }) => {
       <>
         <PrismicRichText
           field={slice.primary.heading1}
-          components={components}
+          components={{ heading2: components.heading1 }}
         />
         <PrismicRichText field={slice.primary.body1} components={components} />
         <PrismicRichText
           field={slice.primary.heading2}
-          components={components}
+          components={{ heading2: components.heading2 }}
         />
         <PrismicRichText field={slice.primary.body2} components={components} />
         <PrismicRichText
