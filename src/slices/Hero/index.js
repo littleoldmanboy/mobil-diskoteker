@@ -94,8 +94,8 @@ const Hero = ({ slice }) => {
               components={components}
             />
           </div>
-          <div className="absolute bg-greenIsh opacity-[0.04] blur-3xl h-64 w-64 md:h-80 md:w-80 rounded-full top-28 -left-16 animate-four"></div>
-          <div className="absolute bg-purpleIsh opacity-[0.04] blur-3xl h-64 w-64 md:h-80 md:w-80 rounded-full top-28 -right-16  animate-five"></div>
+          <div className="absolute bg-greenIsh opacity-[0.02] blur-3xl h-64 w-64 md:h-80 md:w-80 rounded-full top-28 -left-16 animate-four"></div>
+          <div className="absolute bg-purpleIsh opacity-[0.02] blur-3xl h-64 w-64 md:h-80 md:w-80 rounded-full top-28 -right-16  animate-five"></div>
           <div className="absolute bg-white opacity-[0.01] blur-3xl h-60 w-60 md:h-72 md:w-72 rounded-full top-60 left-1/2 transform -translate-x-1/2 animate-six"></div>
         </Bounded>
       )}

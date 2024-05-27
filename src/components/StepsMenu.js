@@ -28,6 +28,7 @@ export default function StepsMenu({ steps }) {
   const setActiveStep = useChoiceStore((state) => state.setActiveStep);
   const choices = useStore(useChoiceStore, (state) => state.choices);
   const setChoice = useChoiceStore((state) => state.setChoice);
+  const resetChoices = useChoiceStore((state) => state.resetChoices);
   const [price, setPrice] = useState([10000]);
 
   const handleChoice = (step, value) => {
@@ -65,6 +66,9 @@ export default function StepsMenu({ steps }) {
                   key={index}
                   onClick={() => {
                     setActiveStep(index);
+                    for (let i = index + 1; i <= steps.length; i++) {
+                      setChoice(i, null);
+                    }
                   }}
                 >
                   {step.data.type}
@@ -116,7 +120,14 @@ export default function StepsMenu({ steps }) {
                         filter_buttonItem.filter_button.data?.value;
 
                       return (
-                        <div key={i} className="relative w-fit drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.1)]">
+                        <div
+                          key={i}
+                          className={cn(
+                            isChosen
+                              ? "bg-gradient-to-r	from-purpleIsh to-greenIsh rounded-full p-px drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.25)]"
+                              : "p-px relative w-fit drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.1)]"
+                          )}
+                        >
                           <Filter
                             isChosen={isChosen}
                             onClick={() => {
@@ -161,9 +172,31 @@ export default function StepsMenu({ steps }) {
                     Videre
                   </button>
                 )}
+                {index === steps.length - 1 && choices[index + 1] && (
+                  <div
+                    onClick={() => {
+                      setActiveStep(5);
+                    }}
+                  >
+                    Afslut allan
+                  </div>
+                )}
               </Fragment>
             );
           })}
+          {activeStep === 5 && (
+            <div>
+              Du er færdig keld
+              <button
+                onClick={() => {
+                  setActiveStep(0);
+                  resetChoices();
+                }}
+              >
+                Nulstil
+              </button>
+            </div>
+          )}
         </div>
       </div>
       <div className="flex flex-col gap-5">

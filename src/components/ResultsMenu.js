@@ -29,6 +29,12 @@ export default function ResultsMenu({ results }) {
     return <div className="text-[#e7e7e7] tracking-wider">Indlæser...</div>;
   }
 
+  if (sortedResults.length === 0) {
+    return (
+      <div className="text-[#e7e7e7] tracking-wider">Ingen resultater</div>
+    );
+  }
+
   return (
     <>
       {sortedResults.map(
