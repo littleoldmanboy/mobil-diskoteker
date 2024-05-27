@@ -173,21 +173,22 @@ export default function StepsMenu({ steps }) {
                   </button>
                 )}
                 {index === steps.length - 1 && choices[index + 1] && (
-                  <div
+                  <button
+                    className="my-3 py-[15px] px-[17px] w-fit text-[12px] font-normal text-white flex tracking-wider justify-center items-center rounded-full transition-all duration-200 ease-in-out border border-[#6a6a6a] hover:bg-[#2d2e2f] bg-darkGray drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.1)]"
                     onClick={() => {
                       setActiveStep(5);
                     }}
                   >
-                    Afslut allan
-                  </div>
+                    Færdig
+                  </button>
                 )}
               </Fragment>
             );
           })}
           {activeStep === 5 && (
             <div>
-              Du er færdig keld
               <button
+                className="my-3 py-[15px] px-[17px] w-fit text-[12px] font-normal text-white flex tracking-wider justify-center items-center rounded-full transition-all duration-200 ease-in-out border border-[#6a6a6a] hover:bg-[#2d2e2f] bg-darkGray drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.1)]"
                 onClick={() => {
                   setActiveStep(0);
                   resetChoices();
@@ -195,6 +196,13 @@ export default function StepsMenu({ steps }) {
               >
                 Nulstil
               </button>
+              <div className="flex flex-col gap-4 mt-16 mx-auto text-white text-[13px] tracking-wider opacity-75 leading-5 text-center max-w-[444px]">
+                <p>Du har nu gennemført stepguiden.</p>
+                <p>
+                  Hvis du vil starte forfra og prøve andre valg, kan du
+                  nulstille dine filtre ved at trykke på knappen ovenover.
+                </p>
+              </div>
             </div>
           )}
         </div>
