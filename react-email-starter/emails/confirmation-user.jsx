@@ -65,6 +65,7 @@ export default function ConfirmationUser({
           <Heading className="mt-8" as="h3">
             Link-URL:
           </Heading>
+          {/* Conditionally display the optional link URL if provided */}
           {link && (
             <>
               <Heading className="mt-8" as="h3">
