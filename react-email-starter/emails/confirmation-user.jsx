@@ -62,9 +62,6 @@ export default function ConfirmationUser({
           <Link href={url} className="text-blue-500 hover:text-blue-700 block">
             {url}
           </Link>
-          <Heading className="mt-8" as="h3">
-            Link-URL:
-          </Heading>
           {/* Conditionally display the optional link URL if provided */}
           {link && (
             <>
