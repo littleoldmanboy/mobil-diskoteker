@@ -30,6 +30,7 @@ const musics = ["Pop", "Elektronisk", "Classics", "Jazz"];
 
 // Define form schema using Zod for validation
 const formSchema = z.object({
+  // Title field must be a string between 2 and 100 characters
   title: z
     .string()
     .min(2, {
@@ -38,12 +39,15 @@ const formSchema = z.object({
     .max(100, {
       message: "Titlen må maks indeholde 100 tegn",
     }),
+  // Locations must be an array of booleans with at least one true value
   locations: z.array(z.boolean()).refine((v) => v.some((x) => x), {
     message: "Der skal vælges mindst ét område",
   }),
+  // Musics must be an array of booleans with at least one true value
   musics: z.array(z.boolean()).refine((v) => v.some((x) => x), {
     message: "Der skal vælges mindst én musikstilart",
   }),
+  // Price must be a string with at least 1 character and must be a number
   price: z
     .string()
     .min(1, {
@@ -52,9 +56,11 @@ const formSchema = z.object({
     .refine((v) => !isNaN(Number(v)), {
       message: "Prisen skal være et tal",
     }),
+  // URL must be a valid URL string
   url: z.string().url({
     message: "URL'en er ikke gyldig",
   }),
+  // Link must be a valid URL string, can be optional or an empty string that transforms to undefined
   link: z
     .string()
     .url({
@@ -62,6 +68,7 @@ const formSchema = z.object({
     })
     .optional()
     .or(z.literal("").transform(() => undefined)),
+  // Email must be a valid email string
   email: z.string().email({
     message: "Emailen er ikke gyldig",
   }),
