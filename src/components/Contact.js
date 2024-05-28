@@ -55,9 +55,13 @@ const formSchema = z.object({
   url: z.string().url({
     message: "URL'en er ikke gyldig",
   }),
-  link: z.string().url({
-    message: "Linket er ikke gyldigt",
-  }),
+  link: z
+    .string()
+    .url({
+      message: "Linket er ikke gyldigt",
+    })
+    .optional()
+    .or(z.literal("").transform(() => undefined)),
   email: z.string().email({
     message: "Emailen er ikke gyldig",
   }),

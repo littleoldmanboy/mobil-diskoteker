@@ -24,7 +24,7 @@ export default function ConfirmationUser({
   musics = ["Pop", "Elektronisk", "Classics", "Jazz"],
   price = "3499",
   url = "https://dennisrussell.dk",
-  link = "https://dennisrussell.dk",
+  link,
 }) {
   return (
     <Html>
@@ -65,9 +65,19 @@ export default function ConfirmationUser({
           <Heading className="mt-8" as="h3">
             Link-URL:
           </Heading>
-          <Link href={link} className="text-blue-500 hover:text-blue-700 block">
-            {link}
-          </Link>
+          {link && (
+            <>
+              <Heading className="mt-8" as="h3">
+                link-URL:
+              </Heading>
+              <Link
+                href={link}
+                className="text-blue-500 hover:text-blue-700 block"
+              >
+                {link}
+              </Link>
+            </>
+          )}
         </Body>
       </Tailwind>
     </Html>
