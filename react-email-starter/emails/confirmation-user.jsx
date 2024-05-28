@@ -17,6 +17,7 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
+// Function component for the user's confirmation email
 export default function ConfirmationUser({
   title = "LittleOldManBoy",
   locations = ["Nord-Midtjylland", "Syddanmark", "Sjælland"],
@@ -28,6 +29,7 @@ export default function ConfirmationUser({
   return (
     <Html>
       <Head />
+      {/* Preview text for the email client */}
       <Preview>Bekræftelsesmail på: {title}</Preview>
       <Tailwind>
         <Body className="bg-white my-auto mx-auto font-sans px-2">
