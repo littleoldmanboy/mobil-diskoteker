@@ -1,5 +1,6 @@
 "use client";
 
+// Import necessary libraries and components
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -23,10 +24,11 @@ import {
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
+// Define array of locations and music styles
 const locations = ["Nord- Midtjylland", "Syddanmark", "Sjælland"];
-
 const musics = ["Pop", "Elektronisk", "Classics", "Jazz"];
 
+// Define form schema using Zod for validation
 const formSchema = z.object({
   title: z
     .string()
@@ -61,9 +63,11 @@ const formSchema = z.object({
   }),
 });
 
+// Contact component definition
 export default function Contact() {
+  // State for form submission status
   const [status, setStatus] = useState("");
-  // 1. Define your form.
+  // Define form using react-hook-form
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -77,10 +81,9 @@ export default function Contact() {
     },
   });
 
-  // 2. Define a submit handler.
+  // Submit handler function
   async function onSubmit(values) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+    // Prepare form data for submission
     const body = {
       ...values,
       locations: values.locations
@@ -91,33 +94,41 @@ export default function Contact() {
         .filter((v) => v),
     };
 
+    // Send confirmation emails to user and owner
     const userEmail = await sendUserConfirmationEmail(body);
     const ownerEmail = await sendOwnerConfirmationEmail(body);
 
+    // Check if emails were sent successfully
     if (userEmail === "success" && ownerEmail === "success") {
+      // Reset form and set success status
       form.reset();
       setStatus("success");
       return;
     }
+    // Set error status if emails were not sent successfully
     setStatus("error");
   }
 
+  // Effect hook to clear status after 4 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
       setStatus("");
     }, 4000);
 
+    // Clean up timer on unmount
     return () => {
       clearTimeout(timer);
     };
   }, [status]);
 
+  // Render the contact form
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="text-white tracking-wider flex flex-col"
       >
+        {/* Render form fields */}
         <FormField
           control={form.control}
           name="title"
@@ -133,6 +144,7 @@ export default function Contact() {
           )}
         />
 
+        {/* Render location checkboxes */}
         <FormField
           control={form.control}
           name="locations"
@@ -169,6 +181,8 @@ export default function Contact() {
             </FormItem>
           )}
         />
+
+        {/* Render music genre checkboxes */}
         <FormField
           control={form.control}
           name="musics"
@@ -203,6 +217,7 @@ export default function Contact() {
           )}
         />
 
+        {/* Render price input field */}
         <FormField
           control={form.control}
           name="price"
@@ -217,6 +232,8 @@ export default function Contact() {
             </FormItem>
           )}
         />
+
+        {/* Render URL input field */}
         <FormField
           control={form.control}
           name="url"
@@ -231,6 +248,8 @@ export default function Contact() {
             </FormItem>
           )}
         />
+
+        {/* Render link input field */}
         <FormField
           control={form.control}
           name="link"
@@ -248,6 +267,8 @@ export default function Contact() {
             </FormItem>
           )}
         />
+
+        {/* Render email input field */}
         <FormField
           control={form.control}
           name="email"
@@ -262,6 +283,8 @@ export default function Contact() {
             </FormItem>
           )}
         />
+
+        {/* Render status message */}
         {status && (
           <FormMessage
             className={cn(status === "success" && "text-white mx-auto mt-6")}
@@ -269,6 +292,8 @@ export default function Contact() {
             {status === "success" ? "Succes!" : "Fejl! Prøv igen."}
           </FormMessage>
         )}
+
+        {/* Render submit button */}
         <Button className="mx-auto w-fit mt-6" type="submit">
           Send
         </Button>
