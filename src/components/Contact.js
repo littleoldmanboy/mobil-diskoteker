@@ -60,7 +60,7 @@ const formSchema = z.object({
   url: z.string().url({
     message: "URL'en er ikke gyldig",
   }),
-  // Link must be a valid URL string, can be optional or an empty string that transforms to undefined
+  // Valid URL string, optional or empty string that transforms to undefined
   link: z
     .string()
     .url({
