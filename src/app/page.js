@@ -10,7 +10,7 @@ export default async function Page() {
   return (
     <>
       <Head>
-        <meta name="theme-color" content="#222222" />
+        <meta name="theme-color" content="#1D1E20" />
       </Head>
       <div className="grid grid-cols-1 lg:grid-cols-2 bg-darkGray max-w-screen-2xl mx-auto">
         <SliceZone slices={page.data.slices} components={components} />
