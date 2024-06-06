@@ -34,9 +34,9 @@ const Steps = async ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       id="steps"
-      className="lg:h-svh flex relative"
+      className="h-svh-minus-52 lg:h-svh flex relative min-h-[804px]"
     >
-      <div className="relative lg:h-[711px] my-auto py-6 w-full">
+      <div className="relative lg:h-[711px] my-auto py-6 w-full h-full">
         <div className="flex flex-col justify-between h-full gap-20">
           {/* Render StepsMenu component with fetched steps data */}
           <StepsMenu steps={steps} />

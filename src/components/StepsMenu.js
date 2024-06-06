@@ -2,7 +2,8 @@
 
 import { useChoiceStore } from "@/store";
 import { PrismicRichText } from "@prismicio/react";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Filter from "./Filter";
 import Heading from "./Heading";
 import {
@@ -23,6 +24,28 @@ const components = {
     </Heading>
   ),
 };
+
+// Animation variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+  exit: { opacity: 0 },
+};
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+  exit: { opacity: 0 },
+};
+
+const widthExpand = {
+  hidden: { width: 0 },
+  visible: { width: "100%" },
+  exit: { width: 0 },
+};
+
+// Initialize state outside the component to ensure consistency across renders
+let completedStepsHeight = null;
 
 // StepsMenu component definition
 export default function StepsMenu({ steps }) {
@@ -52,6 +75,16 @@ export default function StepsMenu({ steps }) {
     setPrice([choices?.[3] || 10000]);
   }, [choices]);
 
+  // Ref to reference completed steps div
+  const completedStepsRef = useRef(null);
+
+  // Effect to update completed steps height after component mounts
+  useEffect(() => {
+    if (completedStepsRef.current) {
+      completedStepsHeight = completedStepsRef.current.offsetHeight;
+    }
+  }, []);
+
   // Render loading state if choices are not yet loaded
   if (!choices) {
     return <div className="text-[#e7e7e7] tracking-wider">Indlæser...</div>;
@@ -61,42 +94,65 @@ export default function StepsMenu({ steps }) {
   return (
     <>
       <div>
-        <div className="flex flex-col gap-7 text-[#c8c8c8] tracking-wider">
+        <div>
           {/* Render list of completed steps */}
-          {steps.map((step, index) => {
-            const chosenStep = choices?.[index + 1];
+          <AnimatePresence>
+            <div
+              className="flex flex-col gap-7 text-[#c8c8c8] tracking-wider"
+              style={{ height: completedStepsHeight }}
+              ref={completedStepsRef}
+            >
+              {steps.map((step, index) => {
+                const chosenStep = choices?.[index + 1];
 
-            // Exclude incomplete steps from rendering
-            if (activeStep <= index) return null;
-            return (
-              <div key={index} className="relative flex justify-between">
-                {/* Render button for each completed step */}
-                <button
-                  className="hover:text-white transition-colors duration-200 ease-in-out"
-                  key={index}
-                  onClick={() => {
-                    // Set active step on button click
-                    setActiveStep(index);
-                    // Reset choices for steps after the selected step
-                    for (let i = index + 1; i <= steps.length; i++) {
-                      setChoice(i, null);
-                    }
-                  }}
-                >
-                  {/* Render step type */}
-                  {step.data.type}
-                </button>
-                {/* Render chosen step information */}
-                <div>
-                  {chosenStep}
-                  {/* Append currency symbol for price step */}
-                  {index === 2 && " kr."}
-                </div>
-                {/* Render horizontal separator */}
-                <div className="absolute w-full h-px bg-[#666666] -bottom-3"></div>
-              </div>
-            );
-          })}
+                // Exclude incomplete steps from rendering
+                if (activeStep <= index) return null;
+                return (
+                  <motion.div
+                    key={index}
+                    className="relative flex justify-between"
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    variants={fadeIn}
+                    transition={{ duration: 0.5 }}
+                  >
+                    {/* Render button for each completed step */}
+                    <button
+                      className="hover:text-white transition-colors duration-200 ease-in-out"
+                      key={index}
+                      onClick={() => {
+                        // Set active step on button click
+                        setActiveStep(index);
+                        // Reset choices for steps after the selected step
+                        for (let i = index + 1; i <= steps.length; i++) {
+                          setChoice(i, null);
+                        }
+                      }}
+                    >
+                      {/* Render step type */}
+                      {step.data.type}
+                    </button>
+                    {/* Render chosen step information */}
+                    <div>
+                      {chosenStep}
+                      {/* Append currency symbol for price step */}
+                      {index === 2 && " kr."}
+                    </div>
+                    {/* Render horizontal separator */}
+                    <motion.div
+                      className="absolute h-px bg-[#666666] -bottom-3"
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      variants={widthExpand}
+                      transition={{ duration: 0.5 }}
+                    ></motion.div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </AnimatePresence>
         </div>
 
         {/* Render current step content and filter buttons */}
@@ -107,7 +163,12 @@ export default function StepsMenu({ steps }) {
 
             return (
               <Fragment key={index}>
-                <div
+                <motion.div
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  variants={fadeInUp}
+                  transition={{ duration: 0.5 }}
                   onClick={() => {
                     // Set active step on content click
                     setActiveStep(index);
@@ -118,8 +179,15 @@ export default function StepsMenu({ steps }) {
                     components={components}
                     field={step.data.question}
                   />
-                </div>
-                <div className="flex flex-wrap gap-4">
+                </motion.div>
+                <motion.div
+                  className="flex flex-wrap gap-4"
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  variants={fadeInUp}
+                  transition={{ duration: 0.5 }}
+                >
                   {/* Render filter buttons for each step */}
                   {index === 2 && activeStep === 2 ? (
                     // Render slider for price step
@@ -188,44 +256,68 @@ export default function StepsMenu({ steps }) {
                       );
                     })
                   )}
-                </div>
+                </motion.div>
 
                 {/* Render "Videre" button if not on the last step or if a choice is made for the current step */}
-                {((index !== steps.length - 1 && choices[index + 1]) ||
-                  index === 2) && (
-                  <button
-                    className="my-3 py-[15px] px-[17px] w-fit text-[12px] font-normal text-white flex tracking-wider justify-center items-center rounded-full transition-all duration-200 ease-in-out border border-[#6a6a6a] hover:bg-[#2d2e2f] bg-darkGray drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.1)]"
-                    onClick={() => {
-                      // If on the price step, set choice and proceed to the next step
-                      if (index === 2) {
-                        setChoice(3, price[0]);
-                      }
-                      // Proceed to the next step
-                      nextStep(index);
-                    }}
-                  >
-                    Videre
-                  </button>
-                )}
-                {/* Render "Færdig" button if on the last step and a choice is made for the last step */}
-                {index === steps.length - 1 && choices[index + 1] && (
-                  <button
-                    className="my-3 py-[15px] px-[17px] w-fit text-[12px] font-normal text-white flex tracking-wider justify-center items-center rounded-full transition-all duration-200 ease-in-out border border-[#6a6a6a] hover:bg-[#2d2e2f] bg-darkGray drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.1)]"
-                    onClick={() => {
-                      // Set active step to 5 when "Færdig" button is clicked
-                      setActiveStep(5);
-                    }}
-                  >
-                    Færdig
-                  </button>
-                )}
+                <AnimatePresence>
+                  {((index !== steps.length - 1 && choices[index + 1]) ||
+                    index === 2) && (
+                    <motion.div
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      variants={fadeInUp}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <button
+                        className="my-3 py-[15px] px-[17px] w-fit text-[12px] font-normal text-white flex tracking-wider justify-center items-center rounded-full transition-all duration-200 ease-in-out border border-[#6a6a6a] hover:bg-[#2d2e2f] bg-darkGray drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.1)]"
+                        onClick={() => {
+                          // If on the price step, set choice and proceed to the next step
+                          if (index === 2) {
+                            setChoice(3, price[0]);
+                          }
+                          // Proceed to the next step
+                          nextStep(index);
+                        }}
+                      >
+                        Videre
+                      </button>
+                    </motion.div>
+                  )}
+                  {/* Render "Færdig" button if on the last step and a choice is made for the last step */}
+                  {index === steps.length - 1 && choices[index + 1] && (
+                    <motion.div
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      variants={fadeInUp}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <button
+                        className="my-3 py-[15px] px-[17px] w-fit text-[12px] font-normal text-white flex tracking-wider justify-center items-center rounded-full transition-all duration-200 ease-in-out border border-[#6a6a6a] hover:bg-[#2d2e2f] bg-darkGray drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.1)]"
+                        onClick={() => {
+                          // Set active step to 5 when "Færdig" button is clicked
+                          setActiveStep(5);
+                        }}
+                      >
+                        Færdig
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </Fragment>
             );
           })}
 
           {/* Render reset button and completion message if activeStep is 5 */}
           {activeStep === 5 && (
-            <div>
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={fadeInUp}
+              transition={{ duration: 0.5 }}
+            >
               {/* Reset button */}
               <button
                 className="my-3 py-[15px] px-[17px] w-fit text-[12px] font-normal text-white flex tracking-wider justify-center items-center rounded-full transition-all duration-200 ease-in-out border border-[#6a6a6a] hover:bg-[#2d2e2f] bg-darkGray drop-shadow-[-3px_0.5px_6px_rgba(0,0,0,0.1)]"
@@ -245,30 +337,37 @@ export default function StepsMenu({ steps }) {
                   nulstille dine filtre ved at trykke på knappen ovenover.
                 </p>
               </div>
-            </div>
+            </motion.div>
           )}
         </div>
       </div>
 
       {/* Render list of steps */}
       <div className="flex flex-col gap-5">
-        {steps.map((step, index) => {
-          // Skip rendering steps that are after the active step
-          if (activeStep > index) return null;
-          return (
-            <p
-              key={index}
-              className={cn(
-                // Apply different text color based on whether step is active or not
-                activeStep === index ? "text-white" : "text-[#7a7a7a]",
-                "text-xl tracking-wider text-start"
-              )}
-            >
-              {/* Display step type */}
-              {step.data.type}
-            </p>
-          );
-        })}
+        <AnimatePresence>
+          {steps.map((step, index) => {
+            // Skip rendering steps that are after the active step
+            if (activeStep > index) return null;
+            return (
+              <motion.p
+                key={index}
+                className={cn(
+                  // Apply different text color based on whether step is active or not
+                  activeStep === index ? "text-white" : "text-[#7a7a7a]",
+                  "text-xl tracking-wider text-start"
+                )}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                variants={fadeInUp}
+                transition={{ duration: 0.5 }}
+              >
+                {/* Display step type */}
+                {step.data.type}
+              </motion.p>
+            );
+          })}
+        </AnimatePresence>
       </div>
     </>
   );
